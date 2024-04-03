@@ -34,4 +34,10 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 
 ### **Esquema Elétrico**
 
+### **Organização das Tarefas**
+
+- <u>Organização e implementação do *hardware*</u>: término do esquemático e teste do hardware físico implementado (sem o Raspberry Pi Pico);
+- <u>Idealização da arquitetura de *software* e teste</u>: criação de um código em *MicroPython* que garanta o funcionamento integral do canhão. Em primeira instância, os *inputs* seriam compostos principalmente pelo teclado e os *outputs* por *prints*.
+- <u>Teste integral de *software* e *hardware*</u>: readaptação do *software* criado para *inputs* e *outputs* do Raspberry Pi Pico, aplicação neste e implementação junto ao *hardware*. Poderão ser testados alguns casos específicos de manuseio do canhão.
+- <u>Implementação com parte mecânica e teste final</u>: junção da parte mecânica do projeto com sua parte eletrônica, realizando os testes finais de validação e verificando se a adição de inércia mecânica não interfere no funcionamento dos servo-motores.
 
