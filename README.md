@@ -34,6 +34,8 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 
 ### **Esquema Elétrico**
 
+![Imagem2](./Images/Esquemático-Completo.png)
+
 ### **Organização das Tarefas**
 
 - <u>Organização e implementação do *hardware*</u>: término do esquemático e teste do hardware físico implementado (sem o Raspberry Pi Pico);

@@ -67,14 +67,8 @@
     "visible_layers": "fffffff_ffffffff",
     "zone_display_mode": 0
   },
-  "git": {
-    "repo_password": "",
-    "repo_type": "",
-    "repo_username": "",
-    "ssh_key": ""
-  },
   "meta": {
-    "filename": "Esquemático Elétrico.kicad_prl",
+    "filename": "Projeto_Microcontroladores.kicad_prl",
     "version": 3
   },
   "project": {
