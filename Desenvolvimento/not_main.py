@@ -102,7 +102,7 @@ def pottentiometer_handler(timer):
     global pottentiometer_values
     
     # Insere o valor medido do ADC no início da lista de valores do potenciômetro
-    pottentiometer_values.insert(0,pottentiometer.read_u16() * (150/65535)) # pottentiometer.read_u16()*(-90/59500)+90
+    pottentiometer_values.insert(0,pottentiometer.read_u16() * (-90/65535)+90) # pottentiometer.read_u16()*(-90/59500)+90
     print(pottentiometer.read_u16())
     
     # Caso a lista tenha 7 valores, exclui o valor final
@@ -126,7 +126,7 @@ def display_handler(timer):
     
     # Calculo da variação de altura associada
     pottentiometer_value = sum(pottentiometer_values)/len(pottentiometer_values)
-    deltaH = Vo * sin(radians(pottentiometer_value)) * (d / (Vo * cos(radians(pottentiometer_value)))) - (g/2) * ((d / (Vo * cos(radians(pottentiometer_value)))))**2
+    deltaH = tan(radians(pottentiometer_value)) * d - (g/2) * ((d / (Vo * cos(radians(pottentiometer_value)))))**2
     
     # Caso deltaH seja menor que 0, assume-se variação de 0 metros
     if deltaH < 0:
@@ -141,7 +141,7 @@ def display_handler(timer):
     display.text("Variacao de", 20, 17)
     display.text("altura calculada:", 8, 29)
     display.text("%.3f" % deltaH, 27, 42)
-  #   display.text("angulo em graus: %.3f" % pottentiometer_value, )
+    display.text("angulo em graus: %.3f" % pottentiometer_value, 20, 5)
 
     # Atualiza o display
     display.show()
