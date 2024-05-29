@@ -41,8 +41,8 @@ display = SSD1306_I2C(128, 64, i2c0)
 display_timer = machine.Timer(-1)
 
 # Variáveis físicas do teste
-Vo = 5
-d = 2
+Vo = 4.37373
+d = 1.9
 g = 9.81
 deltaH = 0
 
@@ -104,6 +104,7 @@ def pottentiometer_handler(timer):
     # Insere o valor medido do ADC no início da lista de valores do potenciômetro
     pottentiometer_values.insert(0,pottentiometer.read_u16() * (-90/65535)+90) # pottentiometer.read_u16()*(-90/59500)+90
     print(pottentiometer.read_u16())
+
     
     # Caso a lista tenha 7 valores, exclui o valor final
     if len(pottentiometer_values) == 7:
@@ -121,6 +122,7 @@ def pottentiometer_handler(timer):
 
 def display_handler(timer):
     
+    global pottentiometer
     global deltaH
     global Vo, g, d
     
@@ -138,6 +140,7 @@ def display_handler(timer):
     display.show()
     
     # Escreve o valor calculado de deltaH
+    display.text("Angulo: %.1f" % pottentiometer_value, 20, 5)
     display.text("Variacao de", 20, 17)
     display.text("altura calculada:", 8, 29)
     display.text("%.3f" % deltaH, 27, 42)
