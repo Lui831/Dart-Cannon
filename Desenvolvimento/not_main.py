@@ -102,7 +102,8 @@ def pottentiometer_handler(timer):
     global pottentiometer_values
     
     # Insere o valor medido do ADC no início da lista de valores do potenciômetro
-    pottentiometer_values.insert(0,pottentiometer.read_u16() * (90/59500))
+    pottentiometer_values.insert(0,pottentiometer.read_u16() * (150/65535)) # pottentiometer.read_u16()*(-90/59500)+90
+    print(pottentiometer.read_u16())
     
     # Caso a lista tenha 7 valores, exclui o valor final
     if len(pottentiometer_values) == 7:
@@ -132,7 +133,7 @@ def display_handler(timer):
         
         deltaH = 0
     
-    # Reseta o display
+    # Reseta o displays
     display.fill(0)
     display.show()
     
@@ -140,6 +141,7 @@ def display_handler(timer):
     display.text("Variacao de", 20, 17)
     display.text("altura calculada:", 8, 29)
     display.text("%.3f" % deltaH, 27, 42)
+  #   display.text("angulo em graus: %.3f" % pottentiometer_value, )
 
     # Atualiza o display
     display.show()
