@@ -50,6 +50,6 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 ## Vídeo Explicativo
 
 
+https://github.com/Lui831/Dart-Cannon/assets/81604963/2cd243e0-ed82-4f9d-b0a3-4bb92a8a0a49
 
-https://github.com/Lui831/Dart-Cannon/assets/81604963/9a7ca37f-0806-461e-a801-f43efa105ddd
 
