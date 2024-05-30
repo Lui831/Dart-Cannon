@@ -1,4 +1,4 @@
-# *Dart Cannon v0.1*
+# *Dart Cannon v1.0*
 
 ### **Descrição Geral**
 
