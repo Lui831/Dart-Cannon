@@ -49,4 +49,7 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 
 ## Vídeo Explicativo
 
-<video src="./Video/Video.mp4" width="320" height="240" controls></video>
+
+https://github.com/Lui831/Dart-Cannon/assets/81604963/2cd243e0-ed82-4f9d-b0a3-4bb92a8a0a49
+
+
