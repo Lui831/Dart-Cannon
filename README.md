@@ -36,6 +36,15 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 
 ![Imagem2](./Images/Esquemático-Completo.png)
 
+### **Modelagem Dinâmica**
+
+![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/f2fe73e1-2a98-4c5f-9cf9-e093c3e3fa21)
+
+![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/648a7397-d2a5-4270-a6f3-0889e88a1da9)
+
+![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/85ce1d1f-030c-4692-be62-e706cc0fc254)
+
+
 ### **Organização das Tarefas**
 
 - <u>Organização e implementação do *hardware*</u>: término do esquemático e teste do hardware físico implementado (sem o Raspberry Pi Pico);
