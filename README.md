@@ -15,16 +15,30 @@ Repositório para o armazenamento de arquivos, *datasheets*, esquemáticos e có
 
 ### **Descrição do Projeto**
 
-O projeto visa a criação de um canhão lançador de projéteis leves, o *`Dart Cannon`*, o qual teria somente **um** grau de liberdade (atira projéteis somente em um plano pré-determinado) e **calcularia** a trajetória do projeto a ser atirado segundo uma referência específica.
+O projeto visa a criação de um canhão lançador de projéteis leves, o *`Dart Cannon`*, o qual teria somente **um** grau de liberdade (atira projéteis somente em um plano pré-determinado) e **calcularia** a trajetória estimada do projeto a ser atirado segundo uma referência específica.
+
+### **Requisitos do Projeto**
+
+Com base em sua descrição simplificada, é possível o levantamento de alguns requisitos necessários para o funcionamento do dispositivo:
+1. Desenvolver um canhão capaz de atirar uma bola de ping-pong;
+2. Tal canhão deve ter o ângulo em relação ao eixo X controlado pelo usuário;
+3. O disparo do canhão deve ser controlado pelo usuário;
+4. Deve estimar a altura aproximada da bolinha em relação a um obstáculo a uma distância previamente calculada, exibindo tal valor para o usuário.
 
 ### **Lista de Componentes**
 
-- *Raspberry* PI Pico;
-- 2 x Servo Motor MG996;
-- Display OLED I²C 128x32 Pixels;
-- Potenciômetro de 10k ohms;
-- *Push-button*;
-- Fonte de alimentação 5V/2A;
+- *Raspberry* PI Pico (R$ 33,90);
+- Servo Motor MG996 (R$ 28,02);
+- Servo Motor SG90 (R$ 13,78);
+- Display OLED I²C 128x32 Pixels (R$ 25,42);
+- Potenciômetro de 10k ohms (R$ 2,16);
+- *Push-button* (R$ 0,19);
+- Filamento PLA para Impressão 3D (R$ 15,00);
+    - 100 R$ / filamento de 1 kg, mas o projeto utilizou 150g de filamento
+- Mola para acionamento do gatilho (R$ 100,00);
+- Placas MDF para base do canhão (R$ 22,00);
+
+Assim, o custo total de implementação do projeto foi de **R$ 240,47**.
 
 ### **Diagrama de Blocos Lógicos**
 
@@ -37,12 +51,18 @@ Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama qu
 ![Imagem2](./Images/Esquemático-Completo.png)
 
 ### **Modelagem Dinâmica**
+ 
+Para esta parte do projeto, nos baseamos [neste vídeo](https://www.youtube.com/watch?v=1R21wWn0c1s). Fizemos os seguintes rascunhos para entender a ideia inicial da parte mecânica. 
 
-![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/f2fe73e1-2a98-4c5f-9cf9-e093c3e3fa21)
+![Imagem3](./Images/RascunhoMecanico.png)
 
-![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/648a7397-d2a5-4270-a6f3-0889e88a1da9)
+Após algumas refatorações no modelo, criamos as modelagens 3D a partir do software SOLIDWORKS. Colocamos algumas imagens da Montagem das peças individuais a seguir.
 
-![image](https://github.com/Lui831/Dart-Cannon/assets/81604963/85ce1d1f-030c-4692-be62-e706cc0fc254)
+![Imagem4](https://github.com/Lui831/Dart-Cannon/assets/81604963/f2fe73e1-2a98-4c5f-9cf9-e093c3e3fa21)
+
+![Imagem5](https://github.com/Lui831/Dart-Cannon/assets/81604963/648a7397-d2a5-4270-a6f3-0889e88a1da9)
+
+![Imagem6](https://github.com/Lui831/Dart-Cannon/assets/81604963/85ce1d1f-030c-4692-be62-e706cc0fc254)
 
 
 ### **Organização das Tarefas**
