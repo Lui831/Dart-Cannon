@@ -6,10 +6,10 @@ Repositório para o armazenamento de arquivos, *datasheets*, esquemáticos e có
 
 ### **Integrantes da Equipe**
 
-- João Vitor Choueri Branco;
-- Luiz Henrique Antoniassi Santos;
-- Pedro Afonso Wirthmann Dian;
-- Vitor Guirão Soller;
+- João Vitor Choueri Branco (21.01075-7);
+- Luiz Henrique Antoniassi Santos (21.01392-6);
+- Pedro Afonso Wirthmann Dian (21.01335-7);
+- Vitor Guirão Soller (21.01444-2);
 
 ---
 
