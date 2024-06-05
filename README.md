@@ -64,8 +64,7 @@ Após algumas refatorações no modelo, criamos as modelagens 3D a partir do sof
 
 ![Imagem6](https://github.com/Lui831/Dart-Cannon/assets/81604963/85ce1d1f-030c-4692-be62-e706cc0fc254)
 
-Arquivos:
-https://we.tl/t-vXzQ60BdNz
+![38F3864F-80E2-4926-B548-6E57FF360483](https://github.com/Lui831/Dart-Cannon/assets/81604963/b86ede53-81ba-4447-9c85-6557c5062c74)
 
 ### **Organização das Tarefas**
 
