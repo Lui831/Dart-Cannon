@@ -67,6 +67,7 @@ Após algumas refatorações no modelo, criamos as modelagens 3D a partir do sof
 ![38F3864F-80E2-4926-B548-6E57FF360483](https://github.com/Lui831/Dart-Cannon/assets/81604963/b86ede53-81ba-4447-9c85-6557c5062c74)
 
 Os modelos utilizados para o projeto foram feitos utilizando o SolidWorks, você pode encontrar o projeto [aqui](https://mauabr-my.sharepoint.com/:u:/g/personal/21_01444-2_maua_br/EdYkC8PgQR5HoR2Ag7gq224BKhw2TkSO_xqjYQnAWDVonw?e=hNFbGS).
+O corpo do lançaddor foi impresso em PLA em uma impressora Creative Ender 3 e foi cortado a Laser, ambas as ferramentas disponíveis no FabLab da Mauá.
 
 
 ### **Organização das Tarefas**
