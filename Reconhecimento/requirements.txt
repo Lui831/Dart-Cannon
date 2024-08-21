@@ -1,0 +1,4 @@
+opencv-python==4.9.0.80
+boto3==1.24.88
+botocore==1.27.96
+python-dotenv==0.21.0
