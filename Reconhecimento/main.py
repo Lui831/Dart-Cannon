@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0) #cv2.VideoCapture(0, cv2.CAP_DSHOW) se windows
     last_time = time.time()
 
     bucket_name = BUCKET_NAME
