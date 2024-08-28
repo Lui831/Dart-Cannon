@@ -3,6 +3,7 @@ import time
 import boto3
 import os
 import dotenv
+import RPi.GPIO as gpio
 
 dotenv.load_dotenv()
 
@@ -11,6 +12,19 @@ AWS_ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 BUCKET_NAME=os.environ.get('BUCKET_NAME')
 
+
+
+# Configure pinnout
+def config_pin(PIN=3):
+    gpio.setmode(gpio.BCM)
+    gpio.setup(PIN, gpio.OUT)
+    gpio.output(PIN, gpio.LOW)
+
+# Functions
+def send_to_pico(PIN=3):
+    gpio.output(PIN, gpio.HIGH)
+    time.sleep(1)
+    gpio.output(PIN, gpio.LOW)
 
 
 def upload_to_s3(client, file_path, bucket_name, object_name=None):
@@ -46,12 +60,14 @@ def compare_faces(client, bucket, ref_image, target_image):
 
 if __name__ == '__main__':
 
+    config_pin()
+
     client_s3 = boto3.client('s3', region_name='us-east-1', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
     client_rekognition = boto3.client('rekognition', region_name='us-east-1', aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
-    cap = cv2.VideoCapture(0) #cv2.VideoCapture(0, cv2.CAP_DSHOW) se windows
+    cap = cv2.VideoCapture(0)
     last_time = time.time()
 
     bucket_name = BUCKET_NAME
@@ -62,7 +78,7 @@ if __name__ == '__main__':
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         for (x, y, w, h) in faces:
-            # cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 5)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 5)
             roi_gray = gray[y:y+w, x:x+w]
             roi_color = frame[y:y+h, x:x+w]
 
@@ -93,10 +109,12 @@ if __name__ == '__main__':
 
             if similarity >= 70:
                 print('É ele')
+                print('Enviando sinal ao rasp pico...')
+                send_to_pico()
             else:
                 print('Não é ele')
 
-        if cv2.waitKey(1) == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
 
@@ -106,7 +124,3 @@ if __name__ == '__main__':
 
     cap.release()
     cv2.destroyAllWindows()
-
-    
-
-
