@@ -4,6 +4,7 @@ import boto3
 import os
 import dotenv
 import threading
+import RPi.GPIO as gpio
 
 dotenv.load_dotenv()
 
@@ -18,19 +19,19 @@ if not os.path.exists('rostos'):
 
 # Configure pinnout
 def config_pin(PIN=3):
-    print()
-    # gpio.setmode(gpio.BCM)
-    # gpio.setup(PIN, gpio.OUT)
-    # gpio.output(PIN, gpio.LOW)
+    print("Configuring pin...")
+    gpio.setmode(gpio.BCM)
+    gpio.setup(PIN, gpio.OUT)
+    gpio.output(PIN, gpio.LOW)
 
 # Functions
 def send_to_pico(PIN=3):
-    print()
-    # gpio.output(PIN, gpio.HIGH)
-    # time.sleep(1)
-    # gpio.output(PIN, gpio.LOW)
+    print("Sending signal to Pico...")
+    gpio.output(PIN, gpio.HIGH)
+    time.sleep(1)
+    gpio.output(PIN, gpio.LOW)
 
-
+# AWS Functions
 def upload_to_s3(client, file_path, bucket_name, object_name=None):
     if object_name is None:
         object_name = file_path
@@ -65,6 +66,7 @@ def compare_faces(client, bucket, ref_image, target_image):
         print(f"Failed to compare faces: {e}")
         return None
 
+# OpenCV Functions
 def draw_rectangle(frame, x, y, w, h):
     cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
@@ -137,6 +139,7 @@ def show_camera_feed(cap):
             break
 
 
+# Main
 if __name__ == '__main__':
 
     config_pin()
