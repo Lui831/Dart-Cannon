@@ -77,7 +77,7 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
     while True:
         ret, frame = cap.read()
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(frame)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
         for (x, y, w, h) in faces:
