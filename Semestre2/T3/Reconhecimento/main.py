@@ -4,7 +4,7 @@ import boto3
 import os
 import dotenv
 import threading
-# import RPi.GPIO as gpio
+import RPi.GPIO as gpio
 
 dotenv.load_dotenv()
 
@@ -17,19 +17,19 @@ if not os.path.exists('rostos'):
     os.makedirs('rostos')
 
 
-# # Configure pinnout
-# def config_pin(PIN=3):
-#     print("Configuring pin...")
-#     gpio.setmode(gpio.BCM)
-#     gpio.setup(PIN, gpio.OUT)
-#     gpio.output(PIN, gpio.LOW)
+# Configure pinnout
+def config_pin(PIN=3):
+    print("Configuring pin...")
+    gpio.setmode(gpio.BCM)
+    gpio.setup(PIN, gpio.OUT)
+    gpio.output(PIN, gpio.LOW)
 
-# # Functions
-# def send_to_pico(PIN=3):
-#     print("Sending signal to Pico...")
-#     gpio.output(PIN, gpio.HIGH)
-#     time.sleep(1)
-#     gpio.output(PIN, gpio.LOW)
+# Functions
+def send_to_pico(PIN=3):
+    print("Sending signal to Pico...")
+    gpio.output(PIN, gpio.HIGH)
+    time.sleep(1)
+    gpio.output(PIN, gpio.LOW)
 
 # AWS Functions
 def upload_to_s3(client, file_path, bucket_name, object_name=None):
@@ -84,16 +84,17 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
             draw_rectangle(frame, x, y, w, h)
 
         current_time = time.time()
+        cv2.imshow('Camera Feed', frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
         if current_time - last_time >= 5 and len(faces) > 0:
             last_time = time.time()
             filename = f"rostos/face_detected_{int(current_time)}.jpg"
             print("5 seconds have passed and face detected")
             cv2.imwrite(filename, frame)
 
-            cv2.imshow('Camera Feed', frame)
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
 
             object_name = filename
 
@@ -115,7 +116,7 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
             if similarity >= 70:
                 print('It is him')
                 print('Sending signal to Pico...')
-                # send_to_pico()
+                send_to_pico()
             else:
                 print('It is not him')
 
@@ -147,7 +148,7 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
 # Main
 if __name__ == '__main__':
 
-    # config_pin()
+    config_pin()
     
     try:
         print("Press ctrl+c to stop the program")
