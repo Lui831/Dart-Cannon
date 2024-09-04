@@ -4,7 +4,7 @@ import boto3
 import os
 import dotenv
 import threading
-import RPi.GPIO as gpio
+# import RPi.GPIO as gpio
 
 dotenv.load_dotenv()
 
@@ -17,19 +17,19 @@ if not os.path.exists('rostos'):
     os.makedirs('rostos')
 
 
-# Configure pinnout
-def config_pin(PIN=3):
-    print("Configuring pin...")
-    gpio.setmode(gpio.BCM)
-    gpio.setup(PIN, gpio.OUT)
-    gpio.output(PIN, gpio.LOW)
+# # Configure pinnout
+# def config_pin(PIN=3):
+#     print("Configuring pin...")
+#     gpio.setmode(gpio.BCM)
+#     gpio.setup(PIN, gpio.OUT)
+#     gpio.output(PIN, gpio.LOW)
 
-# Functions
-def send_to_pico(PIN=3):
-    print("Sending signal to Pico...")
-    gpio.output(PIN, gpio.HIGH)
-    time.sleep(1)
-    gpio.output(PIN, gpio.LOW)
+# # Functions
+# def send_to_pico(PIN=3):
+#     print("Sending signal to Pico...")
+#     gpio.output(PIN, gpio.HIGH)
+#     time.sleep(1)
+#     gpio.output(PIN, gpio.LOW)
 
 # AWS Functions
 def upload_to_s3(client, file_path, bucket_name, object_name=None):
@@ -90,6 +90,11 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
             print("5 seconds have passed and face detected")
             cv2.imwrite(filename, frame)
 
+            cv2.imshow('Camera Feed', frame)
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
             object_name = filename
 
             if upload_to_s3(client_s3, filename, bucket_name, object_name):
@@ -110,39 +115,39 @@ def face_detection(client_s3, client_rekognition, bucket_name, cap):
             if similarity >= 70:
                 print('It is him')
                 print('Sending signal to Pico...')
-                send_to_pico()
+                # send_to_pico()
             else:
                 print('It is not him')
 
         time.sleep(0.1)
 
 
-def show_camera_feed(cap):
+# def show_camera_feed(cap):
 
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+#     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-    while True:
-        ret, frame = cap.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+#     while True:
+#         ret, frame = cap.read()
+#         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-        for (x, y, w, h) in faces:
-            draw_rectangle(frame, x, y, w, h)
+#         for (x, y, w, h) in faces:
+#             draw_rectangle(frame, x, y, w, h)
 
-        if not ret:
-            print("Failed to capture frame")
-            break
+#         if not ret:
+#             print("Failed to capture frame")
+#             break
 
-        cv2.imshow('Camera Feed', frame)
+#         cv2.imshow('Camera Feed', frame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
 
 
 # Main
 if __name__ == '__main__':
 
-    config_pin()
+    # config_pin()
     
     try:
         print("Press ctrl+c to stop the program")
@@ -152,16 +157,16 @@ if __name__ == '__main__':
 
         cap = cv2.VideoCapture(0)
 
-        camera_thread = threading.Thread(target=show_camera_feed, args=(cap,))
-        camera_thread.daemon = True
-        camera_thread.start()
+        # camera_thread = threading.Thread(target=show_camera_feed, args=(cap,))
+        # camera_thread.daemon = True
+        # camera_thread.start()
 
         face_detection(client_s3, client_rekognition, BUCKET_NAME, cap)
 
     except KeyboardInterrupt:
         print("Program stopped")
         print("Press q while on the camera feed window to stop the camera feed")
-        camera_thread.join()
+        # camera_thread.join()
         cap.release()
         cv2.destroyAllWindows()
         print("Camera feed stopped")
