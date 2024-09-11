@@ -22,9 +22,7 @@ O projeto consiste em uma Raspberry Pi conectado ao lançador Dart Cannon previa
 
 Em uma visão do sistema em alto nível, pode-se compreender seu funcionamento a partir do diagrama de blocos visto abaixo.
 
-<p align="center">
-  <img width="910" alt="diagrama eletronico" src="./Images/Dart_Cannon2.drawio.png">
-</p>
+![Dart_Cannon - Blocos](https://github.com/user-attachments/assets/abae70e1-f532-46b9-b5e2-84a080fc0dfd)
 
 ## Tecnologias e conceitos
 
