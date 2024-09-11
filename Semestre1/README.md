@@ -44,17 +44,18 @@ Assim, o custo total de implementação do projeto foi de **R$ 240,47**.
 
 Com base nas proposições realizadas, pode-se estruturar o seguinte diagrama que representa a estrutura lógica do *`Dart Cannon`*:
 
-![Imagem1](./Images/DartCannon.png)
+![DartCannon](https://github.com/user-attachments/assets/89c6ef4d-8012-4cfd-ab32-0d3b56b931b7)
+
 
 ### **Esquema Elétrico**
 
-![Imagem2](./Images/Esquemático-Completo.png)
+![Esquemático-Completo](https://github.com/user-attachments/assets/d2eb126e-f1a2-41ae-9d01-605a8ad8b22e)
 
 ### **Modelagem Dinâmica**
  
 Para esta parte do projeto, nos baseamos [neste vídeo](https://www.youtube.com/watch?v=1R21wWn0c1s). Fizemos os seguintes rascunhos para entender a ideia inicial da parte mecânica. 
 
-![Imagem3](./Images/RascunhoMecanico.png)
+![RascunhoMecanico](https://github.com/user-attachments/assets/de991374-8e64-40f3-9c30-1b835643830c)
 
 Após algumas refatorações no modelo, criamos as modelagens 3D a partir do software SOLIDWORKS. Colocamos algumas imagens da Montagem das peças individuais a seguir.
 
@@ -79,11 +80,9 @@ O corpo do lançaddor foi impresso em PLA em uma impressora Creative Ender 3 e f
 
 ## Imagem do Grupo
 
-![Imagem3](./Images/Grupo.png)
+![Grupo](https://github.com/user-attachments/assets/e1d3d49f-20c1-473c-8669-6719723be612)
 
 ## Vídeo Explicativo
 
-
 https://github.com/Lui831/Dart-Cannon/assets/81604963/2cd243e0-ed82-4f9d-b0a3-4bb92a8a0a49
-
 
