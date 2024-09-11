@@ -73,26 +73,32 @@ Dessa forma, é possível visualizar as **conexões** realizadas, especialmente 
 ## Funcionamento da Aplicação
 
 **Processo de identificação do rosto**
-   - A Web-Cam fica ativa verificando se existe um rosto detectado;
-   - Após 5 segundos, caso ele identifique um rosto novamente, uma foto é tirada e enviada ao Rekognition para validar se tal imagem é parecida o suficiente com o rosto pré-armazenado;
+   - A WebCam fica ativa verificando se existe um rosto detectado;
+   - Após 5 segundos, caso ele identifique um rosto novamente, uma foto é tirada e enviada ao _Rekognition_ para validar se tal imagem é parecida o suficiente com o rosto pré-armazenado;
    - Caso o rosto seja parecido, um sinal é enviado ai Raspberry Pi Pico para o disparo do canhão.
 
 **Dashboard Ubidots**
   - Possui um controle deslizante que permite o controle remoto do ângulo do canhão;
-  - Possui uma parte referente ao registro da última imagem avaliada como válida pelo Rekognition. Ela é recebida após o upload de uma imagem no _Bucket S3_, a partir de uma _Lambda Function_ acionada como _trigger_ do upload;
   - Possui um botão de disparo do canhão.
+  - Possui uma parte referente ao registro da última imagem de rostos reconhecidos pela câmera. Ela é recebida após o upload de uma imagem no _Bucket S3_, a partir de uma _Lambda Function_ acionada como _trigger_ do evento;
+
+
+## Integração com AWS
+
+![arquitetura t3 dart cannon](https://github.com/user-attachments/assets/a81ffb72-8bbf-45ea-af78-b9e3b54ec102)
 
 # Testes
 
 ## Dia 28/08/2024
+No dia especificado, fizemos a primeira validação da nossa ideia, utilizando como "cobaia" o professor Sérgio:
+
+https://github.com/user-attachments/assets/659adb91-fa6f-429c-997f-8389b5c48c2b
 
 ## Dia 11/09/2024 - Apresentação final
 
+https://github.com/user-attachments/assets/f74fdf56-1614-4386-86fe-6d4188c7c860
+
 ## Foto da equipe
 
-# Autores
+![Foto da equipe](https://github.com/user-attachments/assets/2d99d1c5-723f-4679-b15e-48b8ba254fed)
 
-- João Vitor Choueri Branco (21.01075-7);
-- Luiz Henrique Antoniassi Santos (21.01392-6);
-- Pedro Afonso Wirthmann Dian (21.01335-7);
-- Vitor Guirão Soller (21.01444-2);
