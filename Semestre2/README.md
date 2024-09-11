@@ -1,55 +1,37 @@
-# Tamakabin
+# Dart Cannon v2.0 - Reconhecimento facial
 
-**Tamakabin** é o projeto do 2° semestre da disciplina **Microcontroladores e Sistemas Embarcados** (EEN251) do **Instituto Mauá de Tecnologia** (IMT), ministrada pelos professores [Sergio Ribeiro Augusto](https://www.linkedin.com/in/sergio-ribeiro-augusto-258a9ba0/?originalSubdomain=br) e [Rodrigo França](https://www.linkedin.com/in/rodrigo-fran%C3%A7a-847872b1/).<BR>
-Este repositório é responsável pela parte de IoT da aplicação. O front-end está [neste repositório](https://github.com/enzosakamoto/tamakabin-front).
-
-<p align="center">
-  <img width="910" alt="planta" src="https://github.com/user-attachments/assets/808cb715-9244-4dbf-bf49-f9812f788d3e">
-</p>
-
-## Sumário
-
-- [Requisitos](#requisitos)
-- [Escopo](#escopo)
-  - [Diagrama de blocos](#diagrama-de-blocos)
-  - [Tecnologias](#tecnologias-e-conceitos)
-  - [Materiais](#materiais)
-  - [Modelagem eletrônica](#modelagem-eletrônica)
-  - [Modelagem financeira](#modelamento-financeiro)
-- [Funcionamento](#funcionamento)
-- [Testes](#testes)
-- [Vídeo de funcionamento](#vídeo-de-funcionamento)
-  - [Funcioamento simples](#seguidor-básico)
-- [Foto da equipe](#foto-da-equipe)
-- [Autores](#autores)
+**Dart Cannon** é o projeto do 2° semestre da disciplina **Microcontroladores e Sistemas Embarcados** (EEN251) do **Instituto Mauá de Tecnologia** (IMT), ministrada pelos professores [Sergio Ribeiro Augusto](https://www.linkedin.com/in/sergio-ribeiro-augusto-258a9ba0/?originalSubdomain=br) e [Rodrigo França](https://www.linkedin.com/in/rodrigo-fran%C3%A7a-847872b1/).<br>
+Este repositório é responsável pela parte de IoT da aplicação. A infraestrutura AWS foi configurada manualmente
 
 # Requisitos
 
 | id  | requisito                                                                   | tipo      |
 | --- | --------------------------------------------------------------------------- | --------- |
 | 1   | Utilizar sensores digitais                                                  | Técnico   |
-| 2   | Verificar a umidade da planta                                               | Funcional |
-| 3   | Verificar a luminosidade incidida na planta                                 | Funcional |
-| 4   | Verificar a temperatura                                                     | Técnico   |
+| 2   | Tirar fotos quando reconhecer rostos                                        | Funcional |
+| 3   | Subir as fotos em bucket S3                                                 | Funcional |
+| 4   | Comparar rostos com as fotos tiradas                                        | Técnico   |
 | 5   | Utilizar padrões de comunicação HTTP ou MQTT                                | Técnico   |
 | 6   | Comunicar-se com outro dispositivo                                          | Técnico   |
 
 # Escopo
 
-O projeto consiste em uma Raspberry Pi conectada à um vaso de planta que envia requisições com as informações que coleta dos sensores conectados aos pinos de GPIO.
+O projeto consiste em uma Raspberry Pi conectado ao lançador Dart Cannon previamente desenvolvido. O microcomputador possui uma WebCam responsável por reconhecer rostos, então as imagens são comparadas com rostos previamente registrado e caso o resultado seja positivo, o Dart Cannon atira. Também foi construído um dashboard online via Ubidots, no qual ele possui um controlador do ângulo do Dart Cannon, assim como o registro do último rosto identificado pela câmera, e também um gatilho virtual do canhão.
 
 ## Diagrama de blocos
 
-![diagrama_blocos_tamakabin drawio](https://github.com/user-attachments/assets/0b7b289f-1450-4077-9225-5b2d5da3ec60)
+Em uma visão do sistema em alto nível, pode-se compreender seu funcionamento a partir do diagrama de blocos visto abaixo.
 
+<p align="center">
+  <img width="910" alt="diagrama eletronico" src="./Images/Dart_Cannon2.drawio.png">
+</p>
 
 ## Tecnologias e conceitos
 
-- I2C (Comunicação com os displays e sensores)
-- Transistores (MOSFET/Ponte H)
-- PWM (Controle do motor)
+- AWS
 - Requisições HTTP
-- Banco de dados não relacional
+- Ubidots
+- Node-Red
 - PIO (Entrada e saída do microprocessador)
 - APIs
 - Redes
@@ -58,97 +40,59 @@ O projeto consiste em uma Raspberry Pi conectada à um vaso de planta que envia 
 
 O sistema é montado com os seguintes componentes:
 
-- 1 microcomputador **Raspberry Pi 3 Model B+**
-- 1 sensor de **umidade e temperatura** DHT22
-- 1 Módulo **Sensor de Luminosidade** Luz LDR
-- 1 Bomba d'água
-- 1 MOSFETs IRLZ44N
+- *Raspberry Pi 3 Model B+* (R$ 385,60);
+- *Raspberry* PI Pico (R$ 33,90);
+- Servo Motor MG996 (R$ 28,02);
+- Servo Motor SG90 (R$ 13,78);
+- Filamento PLA para Impressão 3D (R$ 15,00);
+    - 100 R$ / filamento de 1 kg, mas o projeto utilizou 150g de filamento
+- Mola para acionamento do gatilho (R$ 100,00);
+- Placas MDF para base do canhão (R$ 22,00);
+
+Assim, o custo total de implementação do projeto foi de **R$598,30**.
 
 ## Modelagem eletrônica
 
-O circuito utiliza diversos conceitos eletrícos e eletrônicos desenvolvidos durante o curso e em entidades acâdemicas relacionadas, como:
+A parte eletrônica do sistema, centralizada essencialmente no Raspberry Pi Pico, foi responsável pelo acionamento de três grandes ações:
 
-- MOSFETs para ativação das bombas
-- Displays e sensores com comunicação I2C
-- Conversão de sinais
-- Regulação de tensão
+- Acionamento manual do canhão, a partir do *dashboard* proveniente do *Ubidots*.
+- Acionamento automático do canhão, a partir do reconhecimento visual do ~~REDACTED~~.
+- Escolha da angulação do canhão em relação ao eixo do horizonte, com precisão de 9 graus.
 
-<p align="center">
-  <img width="910" alt="diagrama eletronico" src="https://github.com/user-attachments/assets/72ba51d3-3a49-4561-89fa-2963866ee962">
-</p>
+Dessa forma, para cada uma das funcionalidades implementadas, os seguintes fluxos de informação foram implementados:
 
+- Para o acionamento manual do canhão, uma estrutura baseada em MQTT foi implementada para a comunicaçao com um botão implementado no *Ubidots*. Essa estrutura foi fundamentada no *Node-RED* e, após realizar a leitura do botão a partir de uma requisição, transfere o seu valor por meio de um sinal digital para o Raspberry Pi Pico, o qual realiza o acionamento do gatilho do canhão.
+- Para o acionamento automático do canhão, o funcionamento pode ser considerado análogo ao caso anterior. No entanto, ao invés da determinação do valor de acionamento ser feito a partir da leitura de uma variável no *Ubidots*, esta é realizada por meio do reconhecimento facial (ou não), do ~~REDACTED~~.
+- Para a escolha da angulação do canhão, seu funcionamento é também análogo ao seu acionamento manual. No entanto, para a passagem do valor de ângulo do Raspberry Pi para o Raspberry Pi Pico, foi adotada uma transmissão por meio de PWM (o valor do ângulo era linearmente proporcional ao *Duty Cycle* do PWM).
 
-## Modelamento financeiro
+Dessa forma, é possível visualizar as **conexões** realizadas, especialmente entre o Raspberry Pi e Raspberry Pi Pico para a realização das funcionalidades apresentadas, a partir da imagem abaixo.
 
-Os componentes do projeto foram fornecidos pelo Instituto Mauá de Tecnologia. Para fins de teste, os equipamentos do Instituto Mauá de Tecnologia como multímetro, fonte e protoboard foram utilizados.<br>
-| Componente         | Preço Estimado (BRL) |
-|--------------------|----------------------|
-| Raspberry Pi 3     | R$ 250,00 - R$ 350,00 |
-| Sensor DHT22       | R$ 20,00 - R$ 40,00   |
-| Módulo LDR         | R$ 5,00 - R$ 15,00    |
 
 # Funcionamento
 
 ## Funcionamento da Aplicação
 
-1. **Coleta de Dados pelos Sensores**
-   - **DHT22**: Mede temperatura e umidade.
-   - **LDR**: Mede a intensidade da luz.
+**Processo de identificação do rosto**
+   - A Web-Cam fica ativa verificando se existe um rosto detectado;
+   - Após 5 segundos, caso ele identifique um rosto novamente, uma foto é tirada e enviada ao Rekognition para validar se tal imagem é parecida o suficiente com o rosto pré-armazenado;
+   - Caso o rosto seja parecido, um sinal é enviado ai Raspberry Pi Pico para o disparo do canhão.
 
-2. **Processamento dos Dados na Raspberry Pi**
-   - A Raspberry Pi lê os dados dos sensores e os processa (e.g., conversão de unidades).
-
-3. **Envio de Dados via HTTP**
-   - A Raspberry Pi envia os dados em formato JSON para uma API via requisição HTTP (`POST`).
-
-4. **Tratamento e Uso dos Dados pela API**
-   - A API armazena, processa ou aciona alertas com base nos dados recebidos.
-
-5. **Possíveis Extensões**
-   - Automação de ações (e.g., ligar ventilador, acender luzes) baseada nos dados dos sensores.
-
-## Depuração
-
-No projeto, a linguagem Python foi utilizada para a aplicação tanto por sua eficiência nesse tipo de caso de uso e também na variedade de bibliotecas que a linguagem oferece.
-
-O `cmd` e as seguintes bibliotecas foram utilizadas para depurar o código:
-- Adafruit_Python
-- requests
-- pymongo
-  
-## Diagrama de funcionamento
+**Dashboard Ubidots**
+  - Possui um controle deslizante que permite o controle remoto do ângulo do canhão;
+  - Possui uma parte referente ao registro da última imagem avaliada como válida pelo Rekognition. Ela é recebida após o upload de uma imagem no _Bucket S3_, a partir de uma _Lambda Function_ acionada como _trigger_ do upload;
+  - Possui um botão de disparo do canhão.
 
 # Testes
 
-## Dia 19/08/2024
+## Dia 28/08/2024
 
-- **Teste de funcionamento do sensor DHT22**
-
-<p align="center">
-  <img height="600" alt="testedht" src="https://github.com/user-attachments/assets/7335f450-3d8d-40ff-b1c1-6864b62ef15f">
-</p>
-
-## Dia 29/08/2024
-
-- **Teste de funcionamento do Display e bomba**
-
-https://github.com/user-attachments/assets/4b965cbf-abdd-4a26-8b6d-a66f4481a4f5
-
-## Dia 04/09/2024 - Apresentação final
-<p align="center">
-   <img height="600" alt="testedht" src="https://img.youtube.com/vi/6dndOLTqGWo/0.jpg" href="https://youtu.be/6dndOLTqGWo">
-</p>
+## Dia 11/09/2024 - Apresentação final
 
 ## Foto da equipe
 
-<p align="center">
-  <img width="800" alt="kirby" src="https://github.com/user-attachments/assets/b4e1d8fe-257f-430c-bb13-04429a5ec331">
-</p>
-
 # Autores
 
-- [Antonio Ferrite 21.00663-6](https://github.com/tom-ferrite) 
-- [Enzo Sakamoto 21.00210-0](https://github.com/enzosakamoto) 
-- [Flavio Murata 21.01192-3](https://github.com/flaviomurata)
-- [Maria Fernanda Pinho 21.00256-8](https://github.com/mafepinho)
-- [Pedro Matumoto 21.00784-5](https://github.com/pedromatumoto)
+- João Vitor Choueri Branco (21.01075-7);
+- Luiz Henrique Antoniassi Santos (21.01392-6);
+- Pedro Afonso Wirthmann Dian (21.01335-7);
+- Vitor Guirão Soller (21.01444-2);
