@@ -13,4 +13,4 @@
 
 O projeto anual envolveu o desenvolvimento do Dart Cannon, um canhão lançador de projéteis leves com um único grau de liberdade, permitindo o disparo em um plano predefinido, e a integração de um sistema inteligente baseado em uma Raspberry Pi. Equipado com uma WebCam para reconhecimento facial, o sistema identifica rostos registrados e aciona o canhão apenas quando uma correspondência é encontrada. Complementando a automação, um dashboard online foi criado usando a plataforma Ubidots, oferecendo controle remoto do ângulo do Dart Cannon, monitoramento do último rosto identificado e um gatilho virtual para o disparo, proporcionando uma solução inovadora e interativa para o lançamento de projéteis.
 
-Para acessar cada parte do projeto (dividido em semestres), acesse as pastas "Semestre1" e "Semestre2".
+Para acessar cada parte do projeto (dividido em semestres), acesse as pastas [Semestre1](https://github.com/Lui831/Dart-Cannon/tree/add-readme/Semestre1) e [Semestre2](https://github.com/Lui831/Dart-Cannon/tree/add-readme/Semestre2).
