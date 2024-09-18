@@ -24,6 +24,12 @@ Em uma visão do sistema em alto nível, pode-se compreender seu funcionamento a
 
 ![Dart_Cannon - Blocos](https://github.com/user-attachments/assets/abae70e1-f532-46b9-b5e2-84a080fc0dfd)
 
+## Esquemático Elétrico
+
+Baseando-se no diagrama de blocos exposto no último tópico e nas tecnologias utilizadas, foi possível a idealização do esquemático elétrico abaixo.
+
+![Dart_Cannon - Blocos](./Esquemático%20Elétrico/Dart_Cannon_v2.0.png)
+
 ## Tecnologias e conceitos
 
 - AWS
