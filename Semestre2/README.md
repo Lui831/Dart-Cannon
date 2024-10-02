@@ -71,7 +71,6 @@ Dessa forma, para cada uma das funcionalidades implementadas, os seguintes fluxo
 
 Dessa forma, é possível visualizar as **conexões** realizadas, especialmente entre o Raspberry Pi e Raspberry Pi Pico para a realização das funcionalidades apresentadas, a partir da imagem abaixo.
 
-
 # Funcionamento
 
 ## Funcionamento da Aplicação
@@ -86,10 +85,28 @@ Dessa forma, é possível visualizar as **conexões** realizadas, especialmente 
   - Possui um botão de disparo do canhão.
   - Possui uma parte referente ao registro da última imagem de rostos reconhecidos pela câmera. Ela é recebida após o upload de uma imagem no _Bucket S3_, a partir de uma _Lambda Function_ acionada como _trigger_ do evento;
 
-
 ## Integração com AWS
 
 ![arquitetura t3 dart cannon](https://github.com/user-attachments/assets/a81ffb72-8bbf-45ea-af78-b9e3b54ec102)
+
+## Fluxograma do Node-RED Implementado no Raspberry Pi
+
+De forma a complementar o diagrama de blocos exposto anteriormente, é possível especificar as funções e o fluxo de dados para o *Node-RED* a partir da imagem abaixo:
+
+![Dart_Cannon - Blocos](./Desenvolvimento_PI_Node_RED/Node-RED_fluxogram.png)
+
+O funcionamento do fluxograma é melhor detalhado na seção anterior, já que é responsável por interfacear diretamente o *dashboard* *Ubidots* e o Raspberry Pi Pico. Para uma melhor compreensão e replicabilidade do fluxograma, é possível obtê-lo diretamente a partir do arquivo `node_red_json.json`, em `./Desenvolvimento_PI_Node_RED`.
+
+
+## Interface Física a partir do Raspberry Pi Pico
+
+Apresentando seu comportamento descrito na aba "Modelagem Eletrônica", o Raspberry Pi Pico foi responsável por:
+
+- Acionamento do servomotor de "Tiro" a partir do valor digital enviado pelo Raspberry Pi a partir do *Node-RED*.
+- Acionamento do servomotor de "Tiro" a partir do valor digital enviado pelo Raspberry Pi a partir do código de reconhecimento facial.
+- Controle do ângulo do servomotor de "Angulação" a partir do PWM enviado pelo Raspberry Pi a partir do *Node-RED*.
+
+Para uma melhor visualização de seu funcionamento e operação, é possível encontrar seu código `main.py`, em *Micropython*, na pasta `./Desenvolvimento_PI_Pico`.
 
 # Testes
 

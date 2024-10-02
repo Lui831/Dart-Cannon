@@ -1,0 +1,156 @@
+[
+    {
+        "id": "9497ed14b03e27b2",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c441d03001c45bb2",
+        "type": "ubidots_in",
+        "z": "9497ed14b03e27b2",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBUS-EEPpnfJGm2kdClN0OkoFcMEkCtuykY",
+        "device_label": "pc-de-teste",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "botao",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "760b3e857fed609a"
+            ]
+        ]
+    },
+    {
+        "id": "fe08910dfb3c833d",
+        "type": "ubidots_in",
+        "z": "9497ed14b03e27b2",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBUS-EEPpnfJGm2kdClN0OkoFcMEkCtuykY",
+        "device_label": "pc-de-teste",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "new-variable-1",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "b5add9be893b9c10"
+            ]
+        ]
+    },
+    {
+        "id": "b5add9be893b9c10",
+        "type": "function",
+        "z": "9497ed14b03e27b2",
+        "name": "function 1",
+        "func": "let payload = msg.payload[\"new-variable-1\"];\nlet sliderValue = parseInt(payload.value, 10);\nmsg.payload = sliderValue\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "d436426ec9d603be"
+            ]
+        ]
+    },
+    {
+        "id": "760b3e857fed609a",
+        "type": "function",
+        "z": "9497ed14b03e27b2",
+        "name": "function 2",
+        "func": "let payload = msg.payload[\"botao\"];\nmsg.payload = payload[\"value\"]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 120,
+        "wires": [
+            [
+                "d0bcac1a89242914"
+            ]
+        ]
+    },
+    {
+        "id": "d436426ec9d603be",
+        "type": "rpi-gpio out",
+        "z": "9497ed14b03e27b2",
+        "name": "",
+        "pin": "4",
+        "set": "",
+        "level": "0",
+        "freq": "1",
+        "out": "pwm",
+        "bcm": true,
+        "x": 600,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d0bcac1a89242914",
+        "type": "rpi-gpio out",
+        "z": "9497ed14b03e27b2",
+        "name": "",
+        "pin": "17",
+        "set": "",
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 600,
+        "y": 120,
+        "wires": []
+    }
+]
